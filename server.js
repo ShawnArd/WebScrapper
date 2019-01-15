@@ -34,6 +34,16 @@ if(process.env.MONGODB_URI) {
 mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 }
 
+var md = mongoose.connection;
+
+md.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+
+md.once('open', function (){
+  console.log('Mongoose Connection Successful.')
+})
+
 // Routes
 
 // A GET route for scraping the echoJS website
